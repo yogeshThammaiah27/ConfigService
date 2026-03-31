@@ -1,0 +1,20 @@
+# server:
+#   port: 8181
+spring:
+  # application:
+  #   name: API-Gateway
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+#          lower-case-service-id: true
+      routes:
+        - id: Product-Service
+          uri: lb://Product-Service
+          predicates:
+            - Path=/product/**
+
+        - id: Order-Service
+          uri: lb://Order-Service
+          predicates:
+            - Path=/order/**
